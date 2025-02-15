@@ -1,0 +1,48 @@
+import { SideNavItem } from "@/types/types";
+import {
+  IconDashboard,
+  IconUserCheck,
+  IconBuildingHospital,
+  IconStethoscope,
+  IconUsers,
+  IconSettings,
+  IconHelpCircle,
+} from "@tabler/icons-react";
+
+export const SIDENAV_ITEMS: SideNavItem[] = [
+  {
+    title: "Dashboard",
+    path: "/super-admin/dashboard",
+    icon: <IconDashboard width="24" height="24" />,
+  },
+  {
+    title: "Approve Hospital Admins",
+    path: "/super-admin/approve-admins",
+    icon: <IconUserCheck width="24" height="24" />,
+  },
+  {
+    title: "Approve Hospitals",
+    path: "/super-admin/approve-hospitals",
+    icon: <IconBuildingHospital width="24" height="24" />,
+  },
+  {
+    title: "Approve Doctors",
+    path: "/super-admin/approve-doctors",
+    icon: <IconStethoscope width="24" height="24" />,
+  },
+  {
+    title: "Manage Users",
+    path: "/super-admin/manage-users",
+    icon: <IconUsers width="24" height="24" />,
+  },
+  {
+    title: "Settings",
+    path: "/super-admin/settings",
+    icon: <IconSettings width="24" height="24" />,
+  },
+  {
+    title: "Support",
+    path: "/super-admin/support",
+    icon: <IconHelpCircle width="24" height="24" />,
+  },
+];
