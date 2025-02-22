@@ -3,6 +3,9 @@ import jwt from "jsonwebtoken";
 import Admin from "@/models/Admin.model";
 import Doctor from "@/models/Doctor.model";
 import Patient from "@/models/Patient.model";
+import dbConfig from "@/middlewares/db.config";
+
+dbConfig();
 
 export async function POST(req: NextRequest) {
   const { formData } = await req.json();

@@ -4,7 +4,7 @@ import { NextRequest, NextResponse } from "next/server";
 export async function PUT(req: NextRequest) {
   const searchParams = req.nextUrl.searchParams;
   const id = searchParams.get("id");
-  const isApproved = searchParams.get("isApproved");
+  const isApproved = searchParams.get("isVerified");
   console.log(id, isApproved);
   if (id && isApproved) {
     // approve admin

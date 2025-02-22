@@ -1,12 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import {
-  IconCalendarEvent,
-  IconCheck,
-  IconX,
-  IconClock,
-} from "@tabler/icons-react";
+import { IconCheck, IconX, IconClock } from "@tabler/icons-react";
 
 interface Appointment {
   _id: string;
@@ -37,15 +32,11 @@ const AppointmentsPage = () => {
       <h1 className="text-3xl font-semibold text-center text-base-content/90">
         My Appointments
       </h1>
-      <p className="text-lg text-center text-base-content/60 my-2">
-        View and manage your upcoming and past appointments.
-      </p>
-
       <div className="flex justify-between items-center my-4">
         <input
           type="text"
           placeholder="Search by doctor name..."
-          className="input input-bordered w-full max-w-md"
+          className="input input-bordered w-full"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
         />

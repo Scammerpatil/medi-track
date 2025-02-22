@@ -17,7 +17,7 @@ export const SIDENAV_ITEMS: SideNavItem[] = [
     icon: <IconDashboard width="24" height="24" />,
   },
   {
-    title: "My Patients",
+    title: "Find Patients",
     path: "/doctor/patients",
     icon: <IconUsers width="24" height="24" />,
   },
@@ -25,15 +25,5 @@ export const SIDENAV_ITEMS: SideNavItem[] = [
     title: "Appointments",
     path: "/doctor/appointments",
     icon: <IconCalendarEvent width="24" height="24" />,
-  },
-  {
-    title: "Medical Records",
-    path: "/doctor/medical-records",
-    icon: <IconClipboardText width="24" height="24" />,
-  },
-  {
-    title: "Prescriptions",
-    path: "/doctor/prescriptions",
-    icon: <IconPill width="24" height="24" />,
   },
 ];

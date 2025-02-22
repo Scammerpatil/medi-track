@@ -1,5 +1,8 @@
 import Admin from "@/models/Admin.model";
+import Doctor from "@/models/Doctor.model";
 import Hospital from "@/models/Hospital.model";
+import Insurance from "@/models/Insurance.model";
+import Patient from "@/models/Patient.model";
 import User from "@/models/User.model";
 import mongoose from "mongoose";
 
@@ -14,6 +17,9 @@ const dbConfig = async () => {
     });
     Admin;
     Hospital;
+    Doctor;
+    Insurance;
+    Patient;
     connection.on("error", (error) => {
       console.log("Error: ", error);
     });

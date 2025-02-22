@@ -2,6 +2,9 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { Doctor } from "@/types/doctor";
+import jsPDF from "jspdf";
+import autoTable from "jspdf-autotable";
+import Link from "next/link";
 
 interface MedicalRecord {
   doctor: Doctor;
@@ -14,6 +17,9 @@ interface MedicalRecord {
 const MedicalRecordsPage = () => {
   const [search, setSearch] = useState("");
   const [records, setRecords] = useState<MedicalRecord[]>([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const recordsPerPage = 5;
+
   useEffect(() => {
     const fetchMedicalRecords = async () => {
       const res = await axios.get("/api/patient/medical-records");
@@ -21,6 +27,29 @@ const MedicalRecordsPage = () => {
     };
     fetchMedicalRecords();
   }, []);
+
+  const indexOfLastRecord = currentPage * recordsPerPage;
+  const indexOfFirstRecord = indexOfLastRecord - recordsPerPage;
+  const currentRecords = records.slice(indexOfFirstRecord, indexOfLastRecord);
+
+  const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
+
+  const downloadPDF = () => {
+    const doc = new jsPDF();
+    doc.text("Medical Records", 14, 10);
+    autoTable(doc, {
+      head: [["Date", "Diagnosis", "Treatment", "Prescriptions", "Doctor"]],
+      body: records.map((record) => [
+        new Date(record.date).toLocaleDateString(),
+        record.diagnosis,
+        record.treatment,
+        record.prescriptions,
+        record.doctor.name,
+      ]),
+    });
+    doc.save("medical_records.pdf");
+  };
+
   return (
     <>
       <h1 className="text-3xl font-semibold text-center text-base-content/90">
@@ -38,6 +67,9 @@ const MedicalRecordsPage = () => {
           value={search}
           onChange={(e) => setSearch(e.target.value)}
         />
+        <button className="btn btn-primary ml-4" onClick={downloadPDF}>
+          Download PDF
+        </button>
       </div>
 
       <div className="overflow-x-auto bg-base-300 p-4 rounded-lg shadow-md">
@@ -53,23 +85,30 @@ const MedicalRecordsPage = () => {
             </tr>
           </thead>
           <tbody>
-            {records.length > 0 ? (
-              records.map((record, index) => (
+            {currentRecords.length > 0 ? (
+              currentRecords.map((record, index) => (
                 <tr key={index} className="text-base-content/80 text-base">
-                  <td>{index + 1}</td>
+                  <td>{indexOfFirstRecord + index + 1}</td>
                   <td className="py-2">
                     {new Date(record.date).toLocaleDateString()}
                   </td>
                   <td>{record.diagnosis}</td>
                   <td>{record.treatment}</td>
-                  <td>{record.prescriptions}</td>
+                  <td>
+                    <Link
+                      href={record.prescriptions}
+                      className="link link-hover link-primary"
+                    >
+                      View Prescription
+                    </Link>
+                  </td>
                   <td>{record.doctor.name}</td>
                 </tr>
               ))
             ) : (
               <tr>
                 <td
-                  colSpan={5}
+                  colSpan={6}
                   className="text-center text-base py-4 text-base-content/50"
                 >
                   No medical records found.
@@ -78,6 +117,24 @@ const MedicalRecordsPage = () => {
             )}
           </tbody>
         </table>
+      </div>
+
+      <div className="flex justify-center items-center mt-4">
+        <button
+          className="btn btn-sm mx-2"
+          onClick={() => paginate(currentPage - 1)}
+          disabled={currentPage === 1}
+        >
+          Previous
+        </button>
+        <span className="text-lg">Page {currentPage}</span>
+        <button
+          className="btn btn-sm mx-2"
+          onClick={() => paginate(currentPage + 1)}
+          disabled={indexOfLastRecord >= records.length}
+        >
+          Next
+        </button>
       </div>
     </>
   );

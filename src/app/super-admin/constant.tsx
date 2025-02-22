@@ -30,19 +30,4 @@ export const SIDENAV_ITEMS: SideNavItem[] = [
     path: "/super-admin/approve-doctors",
     icon: <IconStethoscope width="24" height="24" />,
   },
-  {
-    title: "Manage Users",
-    path: "/super-admin/manage-users",
-    icon: <IconUsers width="24" height="24" />,
-  },
-  {
-    title: "Settings",
-    path: "/super-admin/settings",
-    icon: <IconSettings width="24" height="24" />,
-  },
-  {
-    title: "Support",
-    path: "/super-admin/support",
-    icon: <IconHelpCircle width="24" height="24" />,
-  },
 ];

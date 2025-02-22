@@ -2,6 +2,7 @@
 import { useUser } from "@/context/UserContext";
 import { User } from "@/types/user";
 import axios from "axios";
+import Link from "next/link";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 
@@ -13,6 +14,10 @@ const ApproveAdminsPage = () => {
     name: "",
     address: "",
     contact: "",
+    coordinates: {
+      type: "Point",
+      coordinates: [0.0, 0.0],
+    },
   });
   useEffect(() => {
     fetchHospital();
@@ -28,6 +33,19 @@ const ApproveAdminsPage = () => {
     }
   };
   const handleAddhospital = async () => {
+    if (!navigator.geolocation) {
+      toast.error("Location not available");
+      return;
+    }
+    navigator.geolocation.getCurrentPosition((position) => {
+      setNewHospital({
+        ...newHospital,
+        coordinates: {
+          type: "Point",
+          coordinates: [position.coords.latitude, position.coords.longitude],
+        },
+      });
+    });
     try {
       const res = axios.post(`/api/hospital/addHospital`, {
         newHospital,
@@ -47,66 +65,70 @@ const ApproveAdminsPage = () => {
     }
   };
   return (
-    <div>
-      <h1 className="text-3xl font-semibold text-center">Manage Hospitals</h1>
-      <div className="w-full">
+    <>
+      <h1 className="text-4xl font-bold text-center text-base-content mt-6">
+        Manage Hospitals
+      </h1>
+      <div className="w-full flex justify-center mt-8">
         {hospital ? (
-          <div className="bg-base-200 shadow-md rounded-lg p-6">
-            <h2 className="text-xl font-semibold">{hospital.name}</h2>
-            <p className="text-base-content/90">{hospital.address}</p>
-            <p className="text-base-content/90">{hospital.contact}</p>
+          <div className="bg-base-100 shadow-lg rounded-xl p-6 max-w-lg w-full border border-base-300">
+            <h2 className="text-2xl font-semibold text-base-content">
+              {hospital.name}
+            </h2>
+            <p className="text-base-content/80 mt-2">{hospital.address}</p>
+            <p className="text-base-content/80">{hospital.contact}</p>
+            <Link href={`https://google`} className="link link-primary">
+              View On Map
+            </Link>
           </div>
         ) : (
-          <div className="bg-base-300 shadow-md rounded-lg p-6 mt-5">
-            <h2 className="text-xl font-semibold text-center">
+          <div className="shadow-lg rounded-xl p-6 mt-5 bg-base-100 border border-base-300 max-w-lg w-full">
+            <h2 className="text-2xl font-semibold text-center text-base-content">
               Add New Hospital
             </h2>
-            <div className="border border-base-content rounded-md space-y-4 mt-4 p-10 bg-base-200">
-              <label htmlFor="hospitalName" className="form-control w-full">
+            <div className="space-y-4 mt-4 p-6 bg-base-200 rounded-lg">
+              <label className="form-control w-full">
                 <div className="label">
-                  <span className="label-text">
-                    Hospital Name <span className="text-red-500">*</span>
+                  <span className="label-text text-base-content">
+                    Hospital Name <span className="text-error">*</span>
                   </span>
                 </div>
                 <input
                   type="text"
-                  id="hospitalName"
                   placeholder="Enter hospital name"
-                  className="input input-bordered"
+                  className="input input-bordered bg-base-100"
                   value={newHospital.name}
                   onChange={(e) =>
                     setNewHospital({ ...newHospital, name: e.target.value })
                   }
                 />
               </label>
-              <label htmlFor="hospitalName" className="form-control w-full">
+              <label className="form-control w-full">
                 <div className="label">
-                  <span className="label-text">
-                    Hospital Address <span className="text-red-500">*</span>
+                  <span className="label-text text-base-content">
+                    Hospital Address <span className="text-error">*</span>
                   </span>
                 </div>
                 <input
                   type="text"
-                  id="hospitalAddress"
-                  placeholder="Enter hospital Address"
-                  className="input input-bordered"
+                  placeholder="Enter hospital address"
+                  className="input input-bordered bg-base-100"
                   value={newHospital.address}
                   onChange={(e) =>
                     setNewHospital({ ...newHospital, address: e.target.value })
                   }
                 />
               </label>
-              <label htmlFor="hospitalName" className="form-control w-full">
+              <label className="form-control w-full">
                 <div className="label">
-                  <span className="label-text">
-                    Hospital Contact No. <span className="text-red-500">*</span>
+                  <span className="label-text text-base-content">
+                    Hospital Contact No. <span className="text-error">*</span>
                   </span>
                 </div>
                 <input
                   type="text"
-                  id="hospitalName"
-                  placeholder="Enter hospital name"
-                  className="input input-bordered"
+                  placeholder="Enter hospital contact"
+                  className="input input-bordered bg-base-100"
                   value={newHospital.contact}
                   onChange={(e) =>
                     setNewHospital({ ...newHospital, contact: e.target.value })
@@ -123,7 +145,7 @@ const ApproveAdminsPage = () => {
           </div>
         )}
       </div>
-    </div>
+    </>
   );
 };
 export default ApproveAdminsPage;

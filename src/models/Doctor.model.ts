@@ -42,6 +42,16 @@ const DoctorSchema = new Schema(
       type: Boolean,
       default: false,
     },
+    ratings: [
+      {
+        type: Number,
+      },
+    ],
+    feedbacks: [
+      {
+        type: String,
+      },
+    ],
   },
   { timestamps: true }
 );

@@ -10,8 +10,11 @@ import {
 import toast from "react-hot-toast";
 import { Doctor } from "@/types/doctor";
 import { useUser } from "@/context/UserContext";
+import { useSearchParams } from "next/navigation";
 
 const DoctorsPage = () => {
+  const searchParams = useSearchParams();
+  const id = searchParams.get("id");
   const { user } = useUser();
   const [doctors, setDoctors] = useState<Doctor[]>([]);
   const [search, setSearch] = useState("");
@@ -26,7 +29,7 @@ const DoctorsPage = () => {
   useEffect(() => {
     const fetchDoctors = async () => {
       try {
-        const response = await axios.get("/api/doctor");
+        const response = await axios.get(`/api/doctor/get?id=${id}`);
         setDoctors(response.data.doctors);
       } catch (error) {
         console.error("Error fetching doctors:", error);
@@ -79,9 +82,6 @@ const DoctorsPage = () => {
       <h1 className="text-3xl font-semibold text-center text-base-content/90">
         Book an Appointment
       </h1>
-      <p className="text-lg text-center text-base-content/60 my-2">
-        Find a doctor and schedule your appointment.
-      </p>
       <div className="flex justify-between items-center my-4">
         <input
           type="text"

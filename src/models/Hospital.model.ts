@@ -10,6 +10,17 @@ const HospitalSchema = new Schema(
       type: String,
       required: true,
     },
+    coordinates: {
+      type: {
+        type: String,
+        enum: ["Point"],
+        required: true,
+      },
+      coordinates: {
+        type: [Number],
+        required: true,
+      },
+    },
     contact: {
       type: String,
       required: true,

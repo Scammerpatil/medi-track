@@ -22,7 +22,7 @@ const Header = () => {
               </div>
               <hr className="w-full border border-base-content" />
               <span className="text-sm text-base-content/70 italic">
-                Patient Record Management System
+                Health Care System
               </span>
             </div>
           </Link>

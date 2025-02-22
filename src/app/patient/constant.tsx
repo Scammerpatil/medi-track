@@ -8,6 +8,9 @@ import {
   IconPill,
   IconSettings,
   IconHelpCircle,
+  IconCarCrash,
+  IconBrain,
+  IconHospital,
 } from "@tabler/icons-react";
 
 export const SIDENAV_ITEMS: SideNavItem[] = [
@@ -27,24 +30,19 @@ export const SIDENAV_ITEMS: SideNavItem[] = [
     icon: <IconCalendarEvent width="24" height="24" />,
   },
   {
-    title: "Doctors",
-    path: "/patient/doctors",
-    icon: <IconStethoscope width="24" height="24" />,
+    title: "Hospitals",
+    path: "/patient/hospitals",
+    icon: <IconHospital width="24" height="24" />,
   },
   {
-    title: "Prescriptions",
-    path: "/patient/prescriptions",
-    icon: <IconPill width="24" height="24" />,
+    title: "Claim Insurance",
+    path: "/patient/claim-insurance",
+    icon: <IconCarCrash width="24" height="24" />,
   },
   {
-    title: "Request Access",
-    path: "/patient/request-access",
-    icon: <IconUserCheck width="24" height="24" />,
-  },
-  {
-    title: "Settings",
-    path: "/patient/settings",
-    icon: <IconSettings width="24" height="24" />,
+    title: "Dontate Organs",
+    path: "/patient/donate-organs",
+    icon: <IconBrain width="24" height="24" />,
   },
   {
     title: "Support",

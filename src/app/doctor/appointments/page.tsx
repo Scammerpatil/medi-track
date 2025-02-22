@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-import axios from "axios";
+import axios, { AxiosResponse } from "axios";
 import {
   IconCheck,
   IconX,
@@ -9,6 +9,7 @@ import {
 } from "@tabler/icons-react";
 import toast from "react-hot-toast";
 import { useUser } from "@/context/UserContext";
+import Link from "next/link";
 
 interface Appointment {
   _id: string;
@@ -66,7 +67,40 @@ const AppointmentPage = () => {
     }
   };
 
+  const handlePrescriptionUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files[0]) {
+      const file = e.target.files[0];
+      if (file.size > 5 * 1024 * 1024) {
+        alert("File size exceeds 5MB");
+        return;
+      }
+      const uploadFormData = new FormData();
+      uploadFormData.append("file", file as Blob);
+      const imageResponse = axios.post(
+        "/api/helper/upload-img",
+        uploadFormData
+      );
+      toast.promise(imageResponse, {
+        loading: "Uploading Image...",
+        success: (data: AxiosResponse) => {
+          setFormData({
+            ...formData,
+            prescriptions: data.data.data.url,
+          });
+          return "Image Uploaded Successfully";
+        },
+        error: (err: unknown) => {
+          if (axios.isAxiosError(err) && err.response) {
+            return `This just happened: ${err.response.data.error}`;
+          }
+          return "An unknown error occurred";
+        },
+      });
+    }
+  };
+
   const handleSubmitDiagnosis = async () => {
+    console.log(formData);
     if (!formData.diagnosis || !formData.prescriptions || !formData.treatment) {
       toast.error("Please fill all fields.");
       return;
@@ -101,15 +135,11 @@ const AppointmentPage = () => {
       <h1 className="text-3xl font-semibold text-center text-base-content/90">
         Manage Appointments
       </h1>
-      <p className="text-lg text-center text-base-content/60 my-2">
-        Accept or reject patient appointment requests.
-      </p>
-
       <div className="flex justify-between items-center my-4">
         <input
           type="text"
           placeholder="Search by patient name..."
-          className="input input-bordered w-full max-w-md"
+          className="input input-bordered w-full"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
         />
@@ -135,9 +165,13 @@ const AppointmentPage = () => {
                   <td>{index + 1}</td>
                   <td>{new Date(appointment.date).toLocaleDateString()}</td>
                   <td>{appointment.time}</td>
-                  <td className="flex items-center gap-2">
-                    <IconUser className="text-primary" />{" "}
-                    {appointment.patient.name}
+                  <td className="flex items-center gap-1">
+                    <Link
+                      href={`/doctor/medical-history?id=${appointment.patient._id}`}
+                    >
+                      <IconUser className="text-primary" />{" "}
+                      {appointment.patient.name}
+                    </Link>
                   </td>
                   <td>{appointment.reason}</td>
                   <td>
@@ -223,12 +257,15 @@ const AppointmentPage = () => {
               <label className="block text-base-content/80 font-medium">
                 Prescriptions
               </label>
-              <textarea
-                className="textarea textarea-bordered w-full"
-                value={formData.prescriptions}
-                onChange={(e) => {
-                  setFormData({ ...formData, prescriptions: e.target.value });
-                }}
+              <input
+                type="file"
+                className="file-input input-bordered w-full"
+                accept="image/* .jpg, .jpeg, .png, .pdf"
+                onChange={(e) =>
+                  handlePrescriptionUpload(
+                    e as React.ChangeEvent<HTMLInputElement>
+                  )
+                }
               />
             </div>
 

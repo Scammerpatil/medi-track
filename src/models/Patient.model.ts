@@ -28,7 +28,6 @@ const PatientSchema = new Schema(
         date: { type: Date, default: Date.now },
       },
     ],
-    sharedWith: [{ type: mongoose.Schema.Types.ObjectId, ref: "Doctor" }],
   },
   { timestamps: true }
 );

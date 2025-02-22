@@ -41,83 +41,71 @@ const ApproveDoctorPage = () => {
       <h1 className="text-3xl font-semibold text-center text-base-900">
         Approve Doctors
       </h1>
-      <p className="text-lg text-center text-base-content/60 my-2">
-        Manage and verify doctor profiles before approval.
-      </p>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
-        {doctors.length > 0 ? (
-          doctors.map((doctor: Doctor) => (
-            <div
-              className="card bg-base-300 shadow-md rounded-lg hover:shadow-lg transition-all"
-              key={doctor._id}
-            >
-              <figure className="rounded-lg overflow-hidden">
-                <img
-                  src="https://xsgames.co/randomusers/avatar.php?g=male"
-                  alt="doctor"
-                  className="w-full h-48 object-cover"
-                />
-              </figure>
-              <div className="card-body">
-                <h2 className="card-title text-xl font-medium text-base-content/90">
-                  {doctor.name}
-                </h2>
-                <p className="text-base-content/70">Phone: {doctor.phone}</p>
-                <p className="text-base-content/70">
-                  Specialization: {doctor.specialization}
-                </p>
-                <p className="text-base-content/70">
-                  Experience: {doctor.experience} years
-                </p>
-
-                <div className="divider" />
-
-                <p className="text-base-content/80 font-medium">
-                  Hospital: {doctor.hospital.name}
-                </p>
-                <p className="text-base-content/60">
-                  {doctor.hospital.contact}
-                </p>
-
-                <div className="mt-4 text-center">
-                  {doctor.isApproved ? (
-                    <span className="badge badge-success badge-lg p-4 space-x-3">
-                      <IconCheck className="text-success-content" /> Approved
-                    </span>
-                  ) : (
-                    <span className="badge badge-error badge-lg p-4 space-x-3">
-                      <IconX className="text-error-content" /> Pending Approval
-                    </span>
-                  )}
-                </div>
-
-                <div className="divider" />
-                <div className="card-actions flex justify-between">
-                  {!doctor.isApproved ? (
-                    <button
-                      className="btn btn-success btn-outline w-full"
-                      onClick={handleApprove(doctor._id, true)}
-                    >
-                      Approve
-                    </button>
-                  ) : (
-                    <button
-                      className="btn btn-outline btn-error w-full"
-                      onClick={handleApprove(doctor._id, false)}
-                    >
-                      Reject
-                    </button>
-                  )}
-                </div>
-              </div>
-            </div>
-          ))
-        ) : (
-          <div className="text-center col-span-3 text-base-content/60 text-lg mt-10">
-            No doctors pending approval.
-          </div>
-        )}
+      <div className="overflow-x-auto w-full px-10 mt-5">
+        <table className="table bg-base-100 rounded-xl">
+          <thead className="bg-base-200 text-base-content/80">
+            <tr className="text-base">
+              <th>#</th>
+              <th>Doctor</th>
+              <th>Hospital</th>
+              <th>Contact Number</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            {doctors.length > 0 ? (
+              doctors.map((doctor: Doctor, index: number) => (
+                <tr key={doctor._id} className="hover:bg-base-200">
+                  <th>{index + 1}</th>
+                  <td>
+                    <div className="flex items-center gap-3">
+                      <div className="avatar">
+                        <div className="mask mask-squircle h-12 w-12">
+                          <img
+                            src="https://media.istockphoto.com/id/1386596147/photo/doctors-or-nurses-walking-in-hospital-hallway-blurred-motion.jpg?s=2048x2048&w=is&k=20&c=2djFS1TrbVQwrY1Bp8o2AcEUDr1EWQ7iJM6u5GVK9cg="
+                            alt="Hospital Dummy Image"
+                          />
+                        </div>
+                      </div>
+                      <div>
+                        <div className="font-bold">{doctor.name}</div>
+                        <div className="text-sm opacity-50">
+                          {doctor.hospital?.name}
+                        </div>
+                      </div>
+                    </div>
+                  </td>
+                  <td>{doctor.specialization}</td>
+                  <td>{doctor.phone}</td>
+                  <th>
+                    <div className="">
+                      {!doctor.isApproved ? (
+                        <button
+                          className="btn btn-success btn-outline w-full"
+                          onClick={handleApprove(doctor._id, true)}
+                        >
+                          Approve
+                        </button>
+                      ) : (
+                        <button
+                          className="btn btn-outline btn-error w-full"
+                          onClick={handleApprove(doctor._id, false)}
+                        >
+                          Reject
+                        </button>
+                      )}
+                    </div>
+                  </th>
+                </tr>
+              ))
+            ) : (
+              <tr className="text-center col-span-3 text-base-content/50 text-lg mt-10">
+                <td colSpan={5}>No Doctor pending approval.</td>
+              </tr>
+            )}
+          </tbody>
+        </table>
       </div>
     </>
   );

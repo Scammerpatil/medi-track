@@ -20,12 +20,12 @@ const Component = ({ children }: { children: React.ReactNode }) => {
   return (
     <html lang="en">
       <head>
-        <title>MediTrack - Patient Record Management System</title>
+        <title>MediTrack - Health Care System</title>
         <meta charSet="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta
           name="description"
-          content="MediTrack is a secure and efficient Patient Record Management System (PRMS) designed to streamline hospital workflows, manage electronic medical records (EMR), and facilitate seamless doctor-patient communication. Built with Next.js, DaisyUI, and MongoDB, MediTrack offers role-based access, appointment scheduling, prescription management, and a robust data-sharing system with permissions. Ensure secure, organized, and accessible healthcare records for hospitals, doctors, and patients with MediTrack. 🚀"
+          content="MediTrack is a secure and efficient Health Care System designed to streamline hospital workflows, manage electronic medical records (EMR), and facilitate seamless doctor-patient communication. Built with Next.js, DaisyUI, and MongoDB, MediTrack offers role-based access, appointment scheduling, prescription management, and a robust data-sharing system with permissions. Ensure secure, organized, and accessible healthcare records for hospitals, doctors, and patients with MediTrack. 🚀"
         />
       </head>
       <body className={`antialiased`}>

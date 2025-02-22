@@ -42,80 +42,71 @@ const ApproveHospitalsPage = () => {
       <h1 className="text-3xl font-semibold text-center text-base-content/90">
         Approve Hospitals
       </h1>
-      <p className="text-lg text-center text-base-content/60 my-2">
-        Manage hospital approvals and ensure only verified facilities operate.
-      </p>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
-        {hospitals.length > 0 ? (
-          hospitals.map((hospital: Hospital) => (
-            <div
-              className="card bg-base-300 shadow-md rounded-lg hover:shadow-lg"
-              key={hospital._id}
-            >
-              <figure className="rounded-lg overflow-hidden">
-                <img
-                  src="https://media.istockphoto.com/id/1386596147/photo/doctors-or-nurses-walking-in-hospital-hallway-blurred-motion.jpg?s=2048x2048&w=is&k=20&c=2djFS1TrbVQwrY1Bp8o2AcEUDr1EWQ7iJM6u5GVK9cg="
-                  alt="hospital"
-                  className="w-full h-48 object-cover"
-                />
-              </figure>
-              <div className="card-body">
-                <h2 className="card-title text-xl font-medium text-base-content/90">
-                  {hospital.name}
-                </h2>
-                <p className="text-base-content/70">
-                  Address: {hospital.address}
-                </p>
-                <p className="text-base-content/70">
-                  Contact: {hospital.contact}
-                </p>
-
-                <div className="divider" />
-
-                <p className="text-base-content/80 font-medium">
-                  Admin: {hospital.admin.name}
-                </p>
-                <p className="text-base-content/60">{hospital.admin.email}</p>
-
-                <div className="mt-4 text-center">
-                  {hospital.isVerified ? (
-                    <span className="badge badge-success text-success-content badge-lg px-5 py-3">
-                      <IconCheck className="text-success-content" /> Approved
-                    </span>
-                  ) : (
-                    <span className="badge badge-error text-error-content badge-lg px-5 py-3">
-                      <IconX className="text-error-content" /> Pending Approval
-                    </span>
-                  )}
-                </div>
-
-                <div className="divider" />
-                <div className="card-actions w-full">
-                  {!hospital.isVerified ? (
-                    <button
-                      className="btn btn-success w-full"
-                      onClick={handleApprove(hospital._id, true)}
-                    >
-                      Approve
-                    </button>
-                  ) : (
-                    <button
-                      className="btn btn-error btn-outline w-full"
-                      onClick={handleApprove(hospital._id, false)}
-                    >
-                      Reject
-                    </button>
-                  )}
-                </div>
-              </div>
-            </div>
-          ))
-        ) : (
-          <div className="text-center col-span-3 text-base-content/50 text-lg mt-10">
-            No hospitals pending approval.
-          </div>
-        )}
+      <div className="overflow-x-auto w-full px-10 mt-5">
+        <table className="table bg-base-100 rounded-xl">
+          <thead className="bg-base-200 text-base-content/80">
+            <tr>
+              <th>#</th>
+              <th>Hospital</th>
+              <th>Admin</th>
+              <th>Contact Number</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            {hospitals.length > 0 ? (
+              hospitals.map((hospital: Hospital, index: number) => (
+                <tr key={hospital._id} className="hover:bg-base-200">
+                  <th>{index + 1}</th>
+                  <td>
+                    <div className="flex items-center gap-3">
+                      <div className="avatar">
+                        <div className="mask mask-squircle h-12 w-12">
+                          <img
+                            src="https://media.istockphoto.com/id/1386596147/photo/doctors-or-nurses-walking-in-hospital-hallway-blurred-motion.jpg?s=2048x2048&w=is&k=20&c=2djFS1TrbVQwrY1Bp8o2AcEUDr1EWQ7iJM6u5GVK9cg="
+                            alt="Hospital Dummy Image"
+                          />
+                        </div>
+                      </div>
+                      <div>
+                        <div className="font-bold">{hospital.name}</div>
+                        <div className="text-sm opacity-50">
+                          {hospital.address}
+                        </div>
+                      </div>
+                    </div>
+                  </td>
+                  <td>{hospital.admin?.name}</td>
+                  <td>{hospital.contact}</td>
+                  <th>
+                    <div className="">
+                      {!hospital.isVerified ? (
+                        <button
+                          className="btn btn-success w-full"
+                          onClick={handleApprove(hospital._id, true)}
+                        >
+                          Approve
+                        </button>
+                      ) : (
+                        <button
+                          className="btn btn-error btn-outline w-full"
+                          onClick={handleApprove(hospital._id, false)}
+                        >
+                          Reject
+                        </button>
+                      )}
+                    </div>
+                  </th>
+                </tr>
+              ))
+            ) : (
+              <tr className="text-center col-span-3 text-base-content/50 text-lg mt-10">
+                <td colSpan={5}>No hospitals pending approval.</td>
+              </tr>
+            )}
+          </tbody>
+        </table>
       </div>
     </>
   );
