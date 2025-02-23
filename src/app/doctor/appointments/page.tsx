@@ -13,7 +13,7 @@ import Link from "next/link";
 
 interface Appointment {
   _id: string;
-  patient: { name: string };
+  patient: { _id: string; name: string };
   date: string;
   time: string;
   reason: string;
@@ -59,7 +59,7 @@ const AppointmentPage = () => {
           fetchAppointments();
           return `Appointment ${newStatus.toLowerCase()} successfully`;
         },
-        error: (err) => err.response.data.message,
+        error: (err: any) => err.response.data.message,
       });
     } catch (error) {
       console.error("Error updating appointment:", error);
@@ -118,7 +118,7 @@ const AppointmentPage = () => {
           setSelectedAppointment(null);
           fetchAppointments();
         },
-        error: (err) => err.response.data.message,
+        error: (err: any) => err.response.data.message,
       });
     } catch (error) {
       console.error("Error submitting diagnosis:", error);

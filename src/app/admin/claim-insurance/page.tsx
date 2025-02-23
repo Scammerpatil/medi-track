@@ -3,7 +3,6 @@ import { useUser } from "@/context/UserContext";
 import { Claim } from "@/types/Claim";
 import axios from "axios";
 import { useEffect, useState } from "react";
-
 const ClaimRequest = () => {
   const { user } = useUser();
   const [claimRequest, setClaimRequest] = useState<Claim[]>([]);

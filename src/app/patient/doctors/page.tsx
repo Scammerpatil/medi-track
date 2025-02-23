@@ -1,12 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import {
-  IconCalendarEvent,
-  IconUser,
-  IconStethoscope,
-  IconPhone,
-} from "@tabler/icons-react";
+import { IconUser, IconStethoscope, IconPhone } from "@tabler/icons-react";
 import toast from "react-hot-toast";
 import { Doctor } from "@/types/doctor";
 import { useUser } from "@/context/UserContext";
@@ -36,7 +31,7 @@ const DoctorsPage = () => {
       }
     };
     fetchDoctors();
-  }, []);
+  }, [id]);
 
   const handleBookAppointment = async () => {
     if (

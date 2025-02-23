@@ -1,11 +1,12 @@
 "use client";
 import { User } from "@/types/user";
 import axios from "axios";
+import Image from "next/image";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 
 const ApproveAdminsPage = () => {
-  const [admins, setAdmins] = useState<User[]>([]);
+  const [admins, setAdmins] = useState<any[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const adminsPerPage = 20;
 
@@ -65,13 +66,15 @@ const ApproveAdminsPage = () => {
           </thead>
           <tbody>
             {paginatedAdmins.map((admin, index) => (
-              <tr key={admin._id} className="hover:bg-base-200">
+              <tr key={admin._id || index} className="hover:bg-base-200">
                 <th>{(currentPage - 1) * adminsPerPage + index + 1}</th>
                 <td>
                   <div className="flex items-center gap-3">
                     <div className="avatar">
                       <div className="mask mask-squircle w-12 h-12">
-                        <img
+                        <Image
+                          height={10}
+                          width={10}
                           src={`https://avatar.iran.liara.run/public/${
                             index + 1
                           }`}

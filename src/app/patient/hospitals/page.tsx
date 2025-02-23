@@ -3,11 +3,13 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 
 interface Hospital {
-  id: string;
+  _id: string;
   name: string;
   address: string;
-  latitude: number;
-  longitude: number;
+  coordinates: {
+    coordinates: [0, 0];
+  };
+  distance: 0.0;
 }
 
 const getDistance = (
@@ -96,7 +98,7 @@ const HospitalsPage = () => {
             {hospitals.length > 0 ? (
               hospitals.map((hospital, index) => (
                 <tr
-                  key={hospital.id}
+                  key={hospital._id}
                   className="text-base-content/80 text-base"
                 >
                   <td>{index + 1}</td>

@@ -1,6 +1,7 @@
 import { Doctor } from "./doctor";
 
 export interface Patient {
+  _id?: string;
   name: string;
   phone: string;
   email: string;
@@ -14,6 +15,5 @@ export interface Patient {
       date: Date;
     }
   ];
-  sharedWith: Doctor[];
   appointments: string[];
 }

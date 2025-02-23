@@ -1,13 +1,8 @@
 import { SideNavItem } from "@/types/types";
 import {
   IconDashboard,
-  IconClipboardText,
   IconUsers,
   IconCalendarEvent,
-  IconPill,
-  IconUserCheck,
-  IconSettings,
-  IconHelpCircle,
 } from "@tabler/icons-react";
 
 export const SIDENAV_ITEMS: SideNavItem[] = [

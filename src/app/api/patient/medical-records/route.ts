@@ -7,7 +7,7 @@ export async function GET(req: NextRequest) {
     return NextResponse.redirect("/login");
   }
   try {
-    const decoded = jwt.verify(token, process.env.JWT_SECRET!);
+    const decoded = jwt.verify(token, process.env.JWT_SECRET!) as any;
     if (decoded.role !== "patient") {
       return NextResponse.redirect("/login");
     }

@@ -14,7 +14,7 @@ const MedicalHistroy = () => {
       setPatient(response.data.patient);
     };
     fetchPatient();
-  }, []);
+  }, [id]);
   return (
     <>
       <h1 className="text-center uppercase font-semibold text-2xl">
@@ -33,7 +33,7 @@ const MedicalHistroy = () => {
             </tr>
           </thead>
           <tbody>
-            {patient?.medicalHistory?.length > 0 ? (
+            {patient?.medicalHistory?.length ?? 0 > 0 ? (
               patient?.medicalHistory.map((record, index) => (
                 <tr key={index} className="text-base-content/80 text-base">
                   <td>{index + 1}</td>

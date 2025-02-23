@@ -1,5 +1,4 @@
 import dbConfig from "@/middlewares/db.config";
-import Patient from "@/models/Patient.model";
 import jwt from "jsonwebtoken";
 import { NextRequest, NextResponse } from "next/server";
 

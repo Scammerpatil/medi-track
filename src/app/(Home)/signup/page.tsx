@@ -1,5 +1,6 @@
 "use client";
 import axios from "axios";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
@@ -35,9 +36,6 @@ const SignUp = () => {
       toast.error("Please fill all the fields");
       return;
     }
-    if (formData.role === "admin" || formData.role === "patient") {
-      delete formData.hospital;
-    }
     const response = axios.post("/api/auth/signup", { formData });
     toast.promise(response, {
       loading: "Creating Account",
@@ -45,7 +43,7 @@ const SignUp = () => {
         router.push("/login");
         return "Account Created Successfully";
       },
-      error: (err: unknown) => {
+      error: (err: any) => {
         console.log(err);
         return err.response.data.message;
       },
@@ -55,7 +53,13 @@ const SignUp = () => {
     <div className="flex justify-center items-center w-full bg-base-200 px-5 py-5 min-h-[calc(100vh-5rem)]">
       <div className="xl:max-w-7xl bg-base-100 drop-shadow-xl border border-base-content/20 w-full rounded-md flex justify-between items-stretch px-5 xl:px-5 py-5">
         <div className="sm:w-[60%] lg:w-[50%] bg-cover bg-center items-center justify-center hidden md:flex ">
-          <img src="bg.svg" alt="login" className="h-[500px]" />
+          <Image
+            height={500}
+            width={500}
+            src="/bg.svg"
+            alt="login"
+            className="h-[500px]"
+          />
         </div>
         <div className="mx-auto w-full lg:w-1/2 md:p-10 py-5 md:py-0">
           <h1 className="text-center text-2xl sm:text-3xl font-semibold text-primary">

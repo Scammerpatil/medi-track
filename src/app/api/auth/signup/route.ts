@@ -31,6 +31,7 @@ export async function POST(req: NextRequest) {
       );
     }
     const encryptedPassword = bcrypt.hashSync(formData.password);
+    delete formData.hospital;
     const newAdmin = new Admin({
       ...formData,
       password: encryptedPassword,
@@ -74,6 +75,7 @@ export async function POST(req: NextRequest) {
       );
     }
     const encryptedPassword = bcrypt.hashSync(formData.password);
+    delete formData.hospital;
     const newPatient = new Patient({
       ...formData,
       password: encryptedPassword,

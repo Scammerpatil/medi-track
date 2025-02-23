@@ -3,7 +3,6 @@ import Doctor from "@/models/Doctor.model";
 import Hospital from "@/models/Hospital.model";
 import Insurance from "@/models/Insurance.model";
 import Patient from "@/models/Patient.model";
-import User from "@/models/User.model";
 import mongoose from "mongoose";
 
 // Database Connection

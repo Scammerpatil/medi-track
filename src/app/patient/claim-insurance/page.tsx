@@ -6,7 +6,6 @@ import { Patient } from "@/types/patient";
 import { useUser } from "@/context/UserContext";
 import toast from "react-hot-toast";
 import { Claim } from "@/types/Claim";
-
 const ClaimInsurance = () => {
   const { user } = useUser();
   const [claims, setClaims] = useState([]);
@@ -26,11 +25,10 @@ const ClaimInsurance = () => {
     };
     fetchClaims();
     fetchUser();
-  }, []);
+  }, [user?.id]);
 
-  const handleClaim = async (e) => {
+  const handleClaim = async (e: any) => {
     e.preventDefault();
-    console.log(userData);
     const res = axios.post("/api/patient/claim-insurance", {
       patient: user?.id,
       insuranceNumber,
@@ -46,7 +44,7 @@ const ClaimInsurance = () => {
       loading: "Submitting claim...",
       success: () => {
         fetchClaims();
-        ("Claim submitted successfully");
+        return "Claim submitted successfully";
       },
       error: "Error submitting claim. Please try again",
     });

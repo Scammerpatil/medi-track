@@ -1,6 +1,4 @@
 import { NextRequest, NextResponse } from "next/server";
-import jwt from "jsonwebtoken";
-import Patient from "@/models/Patient.model";
 import Appointment from "@/models/Appointment.model";
 
 export async function POST(req: NextRequest) {

@@ -16,7 +16,7 @@ const Component = ({ children }: { children: React.ReactNode }) => {
       }
     };
     fetchUser();
-  }, []);
+  }, [setUser]);
   return (
     <html lang="en">
       <head>

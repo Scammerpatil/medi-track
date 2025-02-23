@@ -1,13 +1,9 @@
 import { SideNavItem } from "@/types/types";
 import {
   IconDashboard,
-  IconUserPlus,
   IconStethoscope,
   IconUsers,
   IconClipboardList,
-  IconCalendarEvent,
-  IconSettings,
-  IconHelpCircle,
   IconHospital,
 } from "@tabler/icons-react";
 

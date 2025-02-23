@@ -1,7 +1,7 @@
 "use client";
 import { Doctor } from "@/types/doctor";
-import { IconCheck, IconX } from "@tabler/icons-react";
 import axios from "axios";
+import Image from "next/image";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 
@@ -62,7 +62,9 @@ const ApproveDoctorPage = () => {
                     <div className="flex items-center gap-3">
                       <div className="avatar">
                         <div className="mask mask-squircle h-12 w-12">
-                          <img
+                          <Image
+                            height={10}
+                            width={10}
                             src="https://media.istockphoto.com/id/1386596147/photo/doctors-or-nurses-walking-in-hospital-hallway-blurred-motion.jpg?s=2048x2048&w=is&k=20&c=2djFS1TrbVQwrY1Bp8o2AcEUDr1EWQ7iJM6u5GVK9cg="
                             alt="Hospital Dummy Image"
                           />

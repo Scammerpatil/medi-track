@@ -1,10 +1,10 @@
 import dbConfig from "@/middlewares/db.config";
 import Doctor from "@/models/Doctor.model";
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 
 dbConfig();
 
-export async function GET(req: NextRequest) {
+export async function GET() {
   try {
     const doctors = await Doctor.find({ isApproved: true });
     return NextResponse.json({ doctors });

@@ -4,9 +4,6 @@ import {
   IconUserCheck,
   IconBuildingHospital,
   IconStethoscope,
-  IconUsers,
-  IconSettings,
-  IconHelpCircle,
 } from "@tabler/icons-react";
 
 export const SIDENAV_ITEMS: SideNavItem[] = [

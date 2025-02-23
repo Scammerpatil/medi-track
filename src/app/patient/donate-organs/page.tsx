@@ -11,6 +11,7 @@ interface OrganDonation {
   hospital: { name: string };
   organ: string;
   status: string;
+  createdAt: Date;
 }
 
 const OrganDonationPage = () => {
@@ -23,7 +24,6 @@ const OrganDonationPage = () => {
     const res = await axios.get(`/api/donate-organs?id=${user?.id}`);
     setDonations(res.data.donations);
   };
-
   useEffect(() => {
     const fetchHospital = async () => {
       const res = await axios.get(`/api/hospital`);

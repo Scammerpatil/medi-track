@@ -1,6 +1,5 @@
 "use client";
 import { useUser } from "@/context/UserContext";
-import { User } from "@/types/user";
 import axios from "axios";
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -8,7 +7,15 @@ import toast from "react-hot-toast";
 
 const ApproveAdminsPage = () => {
   const { user } = useUser();
-  const [hospital, setHospital] = useState();
+  const [hospital, setHospital] = useState({
+    name: "",
+    address: "",
+    contact: "",
+    coordinates: {
+      type: "Point",
+      coordinates: [0.0, 0.0],
+    },
+  });
   if (!user) return null;
   const [newHospital, setNewHospital] = useState({
     name: "",

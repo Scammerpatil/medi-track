@@ -1,6 +1,7 @@
 import { Hospital } from "./hospital";
 
 export interface Doctor {
+  _id: string;
   name: string;
   email: string;
   phone: string;

@@ -2,7 +2,6 @@
 import React from "react";
 import { useUser } from "@/context/UserContext";
 import { SIDENAV_ITEMS } from "../constant";
-import { User } from "@/types/user";
 
 const UserDashboardPage = () => {
   const { user } = useUser();
