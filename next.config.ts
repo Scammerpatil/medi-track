@@ -4,9 +4,9 @@ const nextConfig: NextConfig = {
   /* config options here */
   images: {
     remotePatterns: [
-      {
-        hostname: "static.vecteezy.com",
-      },
+      { hostname: "static.vecteezy.com" },
+      { hostname: "avatar.iran.liara.run" },
+      { hostname: "media.istockphoto.com" },
     ],
   },
 };
