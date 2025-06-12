@@ -18,7 +18,7 @@ const Header = () => {
                 <span className="text-primary font-extrabold text-xl">
                   Medi
                 </span>
-                <span className="text-accent font-semibold text-xl">Track</span>
+                <span className="text-accent font-semibold text-xl">Trust</span>
               </div>
               <hr className="w-full border border-base-content" />
               <span className="text-sm text-base-content/70 italic">

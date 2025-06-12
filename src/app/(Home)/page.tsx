@@ -56,7 +56,7 @@ const Hero = () => {
                   </li>
                 </ul>
                 <p className="mt-4 text-base !leading-relaxed font-extralight text-base-content sm:text-lg md:text-xl">
-                  Join <strong>MediTrack</strong> and take control of healthcare
+                  Join <strong>MediTrust</strong> and take control of healthcare
                   management with ease! 🏥💙
                 </p>
 
